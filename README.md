@@ -79,11 +79,11 @@ If you want to contribute or build upon our work, you can easily fork this repos
 2. Select where you want to fork the repository (e.g., your personal GitHub account).
 3. Once the repository is forked, clone it to your local machine:
    ```bash
-   git clone https://github.com/[YOUR-USERNAME]/[REPOSITORY-NAME].git
+   git clone https://github.com/Charan-Dasari/EV_Charge_Station.git
    ```
 4. Navigate into the cloned directory:
    ```bash
-   cd [REPOSITORY-NAME]
+   cd EV_Charge_Station
    ```
 5. Follow the **How to Run** instructions above to set up your local development environment!
 
