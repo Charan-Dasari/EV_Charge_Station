@@ -43,7 +43,7 @@ This comprehensive system was developed collaboratively as an academic project:
 ### 1. Backend Setup (.NET)
 1. Navigate to the Backend directory:
    ```bash
-   cd EV_Backend_v2.3/EV_Charge_Station
+   cd backend/EV_Charge_Station
    ```
 2. **Database Configuration**: Create or modify the `appsettings.json` file inside the backend directory and update the `DefaultConnection` string with your local SQL Database credentials. *(Do not upload your real credentials to GitHub!)*
 3. Restore dependencies and run the server:
@@ -56,7 +56,7 @@ This comprehensive system was developed collaboratively as an academic project:
 ### 2. Frontend Setup (React)
 1. Open a new terminal and navigate to the Frontend directory:
    ```bash
-   cd EV_Frontend_v2.5
+   cd frontend
    ```
 2. Install the necessary Node packages (If you encounter a peer dependency issue, use `--legacy-peer-deps`):
    ```bash
