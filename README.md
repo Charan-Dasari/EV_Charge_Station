@@ -12,9 +12,9 @@ This project is divided into two main architectures:
 
 This comprehensive system was developed collaboratively as an academic project:
 
-* **[Rudra Thakker]** - Frontend Developer (React, Mapping, UI/UX)
-* **[Devichara Dasari]** - Backend Developer (.NET Core APIs, Database Architecture)
-* **[Professor Viraj Daxini]** - Project Guide & Supervisor
+* **Rudra Thakker** - Frontend Developer (React, Mapping, UI/UX)
+* **Devichara Dasari** - Backend Developer (.NET Core APIs, Database Architecture)
+* **Professor Viraj Daxini** - Project Guide & Supervisor
 
 ---
 
