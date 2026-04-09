@@ -1,0 +1,178 @@
+﻿/* -------- Global -------- */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #e0f2fe; /* soft light blue */
+}
+
+/* -------- Header -------- */
+header {
+    height: 64px;
+    background: linear-gradient(90deg, #38bdf8, #22c55e);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+    header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+
+/* -------- Map -------- */
+#map {
+    flex: 1;
+    width: 100%;
+}
+
+/* -------- Floating Theme Toggle -------- */
+.floating-toggle {
+    position: absolute;
+    top: 80px;
+    left: 50px;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: #0f172a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    transition: all 0.25s ease;
+}
+
+    .floating-toggle:hover {
+        transform: scale(1.05);
+        background: #38bdf8;
+        color: white;
+    }
+
+/* -------- Leaflet Control Styling (optional polish) -------- */
+.leaflet-control {
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+.leaflet-control-layers {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.leaflet-control-zoom a {
+    background: white !important;
+    color: #0f172a !important;
+}
+
+    .leaflet-control-zoom a:hover {
+        background: #38bdf8 !important;
+        color: white !important;
+    }
+.leaflet-popup-content {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+
+#statusBox {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+.route-panel {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 320px;
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+}
+
+    .route-panel h3 {
+        margin: 0 0 12px 0;
+        font-size: 18px;
+    }
+
+.route-info {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.route-distance {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.route-btn-primary {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2ecc71;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .route-btn-primary:hover {
+        background-color: #27ae60;
+    }
+
+.route-btn-secondary {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+.route-btn {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .route-btn:hover {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .route-btn:active {
+        transform: translateY(0px);
+        box-shadow: none;
+    }

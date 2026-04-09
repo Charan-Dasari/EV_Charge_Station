@@ -1,0 +1,320 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh; /* dynamic viewport — accounts for mobile browser chrome */
+  overflow: hidden;
+}
+
+/* ── Status bar ── */
+.cs-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e8e3d8;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.cs-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.cs-status-pill.warning {
+  background: #fdf0e8;
+  color: #c8652a;
+  border: 1px solid #f0ceb0;
+}
+
+.cs-status-pill.nav {
+  background: #e8f5eb;
+  color: #2a7a3b;
+  border: 1px solid #b8dcbf;
+  gap: 10px;
+}
+
+.cs-status-pill.picking {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.cs-status-pill.nearby {
+  background: #f5f0e8;
+  color: #6a6560;
+  border: 1px solid #e8e3d8;
+}
+
+.cs-stop-nav {
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1.5px solid #2a7a3b;
+  background: transparent;
+  color: #2a7a3b;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cs-stop-nav:hover {
+  background: #2a7a3b;
+  color: #fff;
+}
+
+/* ── Body ── */
+.home-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── Map ── */
+.home-map {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.home-map.hidden {
+  display: none;
+}
+
+/* Map-only view: stretch to fill the full body */
+.home-map.full-map {
+  flex: 1;
+  height: 100%;
+}
+
+/* ── Sidebar — Both view ── */
+.home-sidebar {
+  width: 380px;
+  min-width: 380px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-left: 2px solid #1a1410;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.home-sidebar.hidden {
+  display: none;
+}
+
+/* ── Sidebar — List view full screen ── */
+.home-sidebar.full {
+  width: 100vw !important;
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+  border-left: none;
+  background: #f5f0e8;
+  /* In list-only mode, allow vertical scroll through the page */
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
+/* Override cs-sidebar fixed width in list view */
+.home-sidebar.full .cs-sidebar {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  border-right: none;
+  background: transparent;
+}
+
+/* ── List view top bar (search + chips) ── */
+.home-sidebar.full .cs-sf {
+  background: #fff;
+  border-bottom: 2px solid #1a1410;
+  padding: 14px 32px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.home-sidebar.full .cs-sf-search {
+  width: 400px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.home-sidebar.full .cs-sf-chips {
+  padding-bottom: 0;
+  flex: 1;
+}
+
+/* ── List view stats row ── */
+.home-sidebar.full .cs-stats-row {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #e8e3d8;
+  padding: 0 32px;
+}
+
+.home-sidebar.full .cs-stat {
+  border-right: 1px solid #e8e3d8;
+  padding: 12px 32px;
+  flex: 0 0 auto;
+}
+
+/* ── List view section heading ── */
+.home-sidebar.full .cs-sec-head {
+  padding: 14px 32px 10px;
+  background: #f5f0e8;
+  border-bottom: 1px solid #e8e3d8;
+}
+
+/* ── List view cards in grid ── */
+.home-sidebar.full .cs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-auto-rows: auto;      /* each row takes its natural height */
+  align-items: start;
+  gap: 14px;
+  padding: 20px 32px;
+  align-content: start;
+  background: #f5f0e8;
+  /* KEY FIX: don't let flex:1 constrain height — let grid grow naturally */
+  flex: none !important;
+  height: auto !important;
+  overflow-y: visible;       /* parent cs-sidebar handles scroll */
+}
+
+/* The sidebar itself provides the scrollable container in full/list mode */
+.home-sidebar.full .cs-sidebar {
+  overflow-y: auto !important;
+}
+
+/* Cards sit on white in grid */
+.home-sidebar.full .cs-card {
+  background: #fff;
+}
+
+/* ── Empty state centered ── */
+.home-sidebar.full .cs-empty {
+  grid-column: 1 / -1;
+  padding: 80px 24px;
+}
+
+/* ─── Responsive Home Layout ───────────────────── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .home-sidebar {
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+  }
+
+  .home-sidebar.full .cs-list {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 16px 20px;
+  }
+
+  .home-sidebar.full .cs-sf {
+    padding: 12px 20px 0;
+  }
+
+  .home-sidebar.full .cs-sf-search {
+    width: 300px;
+  }
+}
+
+/* Mobile — stack vertically */
+@media (max-width: 768px) {
+  .home-body {
+    flex-direction: column;
+  }
+
+  .home-map {
+    flex: none;
+    height: 42vh;
+    min-height: 220px;
+  }
+
+  /* Map-only on mobile: fill the entire body height (no gap) */
+  .home-map.full-map {
+    flex: 1;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .home-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    flex: 1;
+    border-left: none;
+    border-top: 2px solid #1a1410;
+    min-height: 0;
+  }
+
+  .home-sidebar.hidden {
+    display: none;
+  }
+
+  /* List view */
+  .home-sidebar.full .cs-sf {
+    flex-direction: column;
+    padding: 10px 14px 0;
+    gap: 8px;
+  }
+
+  .home-sidebar.full .cs-sf-search {
+    width: 100%;
+  }
+
+  .home-sidebar.full .cs-list {
+    grid-template-columns: 1fr;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .home-sidebar.full .cs-stats-row {
+    padding: 0 14px;
+  }
+
+  .home-sidebar.full .cs-sec-head {
+    padding: 10px 14px 8px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .home-map {
+    height: 38dvh;
+    min-height: 200px;
+  }
+
+  .home-map.full-map {
+    flex: 1;
+    height: 100dvh;
+    min-height: 0;
+  }
+
+  .cs-status-bar {
+    padding: 3px 10px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .cs-status-pill {
+    padding: 3px 8px;
+    font-size: 10.5px;
+  }
+}

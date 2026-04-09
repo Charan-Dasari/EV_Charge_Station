@@ -1,0 +1,155 @@
+/* ─── Favorites Page — matches site warm theme ───── */
+
+.favorites-page {
+  min-height: 100vh;
+  background: #f5f0e8;
+  padding: 32px 24px;
+}
+
+.favorites-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ── Make the StationList sidebar behave naturally on the Favorites page ── */
+.favorites-page .cs-sidebar {
+  height: auto !important;
+  overflow: visible !important;
+  background: transparent;
+}
+
+/* The list itself scrolls via the page — remove fixed-height scroll container */
+.favorites-page .cs-list {
+  overflow: visible !important;
+  height: auto !important;
+  flex: none !important;
+  max-height: none !important;
+}
+
+/* Stats row and section header don't need a border in favorites */
+.favorites-page .cs-stats-row {
+  border-radius: 8px 8px 0 0;
+  border: 2px solid #1a1410;
+  border-bottom: 1px solid #e5e7eb;
+  margin-top: 0;
+}
+
+.favorites-page .cs-sec-head {
+  border: 2px solid #1a1410;
+  border-top: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Cards list container */
+.favorites-page .cs-list {
+  border: 2px solid #1a1410;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.page-header-left {
+  flex: 1;
+}
+
+.back-link {
+  display: inline-block;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #c8652a;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.15s;
+}
+
+.back-link:hover {
+  color: #1a1410;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1410;
+  margin: 0 0 6px;
+}
+
+.page-subtitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: #9a9186;
+  margin: 0;
+}
+
+.favorites-count-badge {
+  background: #fff;
+  border: 2px solid #1a1410;
+  color: #1a1410;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 #1a1410;
+}
+
+.favorites-empty {
+  text-align: center;
+  padding: 80px 24px;
+  background: #fff;
+  border: 2px solid #1a1410;
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 #1a1410;
+}
+
+.empty-illustration {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.favorites-empty h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #1a1410;
+  margin: 0 0 12px;
+}
+
+.favorites-empty p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: #9a9186;
+  max-width: 320px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.browse-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #1a1410;
+  color: #f5f0e8;
+  text-decoration: none;
+  border-radius: 4px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  box-shadow: 2px 2px 0 #c8652a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.browse-btn:hover {
+  background: #2d2319;
+  box-shadow: 3px 3px 0 #c8652a;
+}

@@ -1,0 +1,610 @@
+/* ─── Map Styles ─────────────────────────────── */
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-map {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+}
+
+/* ─── Custom Markers ─────────────────────────── */
+
+.custom-marker {
+  position: relative;
+  width: 36px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.custom-marker:hover {
+  transform: rotate(-45deg) scale(1.15);
+}
+
+.marker-available {
+  background: linear-gradient(135deg, #00c851, #007e33);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.marker-unavailable {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.marker-letter {
+  transform: rotate(45deg);
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.marker-pulse {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border-radius: 1px;
+}
+
+/* ─── User Location Marker ───────────────────── */
+
+.user-marker {
+  width: 20px;
+  height: 20px;
+  background: #00c8ff;
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(0, 200, 255, 0.3);
+  position: relative;
+}
+
+.user-pulse {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 200, 255, 0.5);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ─── Station Popup ──────────────────────────── */
+
+.station-popup-container .leaflet-popup-content-wrapper {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 0;
+  overflow: hidden;
+}
+
+.station-popup-container .leaflet-popup-tip-container .leaflet-popup-tip {
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.station-popup-container .leaflet-popup-content {
+  margin: 0;
+  min-width: 260px;
+  background: transparent;
+}
+
+/* Close button for light theme */
+.station-popup-container .leaflet-popup-close-button {
+  color: #9ca3af !important;
+  font-size: 18px !important;
+  top: 8px !important;
+  right: 10px !important;
+  z-index: 10;
+}
+.station-popup-container .leaflet-popup-close-button:hover {
+  color: #111827 !important;
+  background: transparent !important;
+}
+
+.station-popup {
+  padding: 16px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.popup-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.popup-status.available {
+  background: rgba(0, 200, 81, 0.15);
+  color: #00c851;
+  border: 1px solid rgba(0, 200, 81, 0.3);
+}
+
+.popup-status.unavailable {
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff4444;
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.popup-name {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.popup-address {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.popup-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.popup-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stat-icon {
+  font-size: 14px;
+}
+
+.popup-plugs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  background: rgba(0, 200, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 200, 255, 0.1);
+}
+
+.popup-wait {
+  color: rgba(255, 200, 0, 0.8);
+}
+
+.popup-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.popup-btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.popup-btn.primary {
+  background: linear-gradient(135deg, #00c8ff, #0066ff);
+  color: white;
+}
+
+.popup-btn.primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.popup-btn.secondary {
+  background: transparent;
+  color: #00c8ff;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+}
+
+.popup-btn.secondary:hover {
+  background: rgba(0, 200, 255, 0.1);
+}
+
+/* ─── Popup User ─────────────────────────────── */
+
+.popup-user {
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+  padding: 4px;
+}
+
+.popup-user strong {
+  display: block;
+  color: #00c8ff;
+  font-size: 14px;
+}
+
+.popup-user p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+
+/* ─── Map Legend ─────────────────────────────── */
+
+.map-legend {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  z-index: 500;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #374151;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.green { background: #16a34a; box-shadow: 0 0 5px rgba(22, 163, 74, 0.5); }
+.legend-dot.red   { background: #dc2626; box-shadow: 0 0 5px rgba(220, 38, 38, 0.5); }
+.legend-dot.blue  { background: #2563eb; box-shadow: 0 0 5px rgba(37, 99, 235, 0.5); }
+
+.legend-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 2px 0;
+}
+
+/* ─── Count Badge ────────────────────────────── */
+
+.map-count-badge {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.locate-wrapper {
+  margin-top: 5px;
+}
+
+.locate-me-btn {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+
+.locate-me-btn:hover {
+  background: #f0f0f0;
+}
+
+/* ── Pin-style POI Markers ────────────────────────────────────── */
+
+.poi-pin-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+}
+
+.poi-pin-head {
+  width: 34px;
+  height: 34px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2.5px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.poi-pin-emoji {
+  transform: rotate(45deg);  /* counter-rotate so emoji stays upright */
+  font-size: 15px;
+  line-height: 1;
+  display: block;
+}
+
+.poi-pin-tail {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 12px solid;       /* color set inline matching pin head */
+  margin-top: -1px;
+}
+
+/* ── Legend pin dot (matches POI pin color) ───────────────────── */
+
+.legend-pin {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+/* ── POI Toggle color dot ─────────────────────────────────────── */
+
+.poi-toggle-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ── POI count badge beside each toggle ──────────────────────── */
+
+.poi-count {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 1px 7px;
+  color: #fff;
+  min-width: 22px;
+  text-align: center;
+}
+
+/* ── Zoom-out hint overlay (sits above the map, bottom center) ── */
+
+.zoom-hint-overlay {
+  position: absolute;
+  bottom: 90px;               /* above the map-count-badge */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85);
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ─── EV Cluster Bubbles ─────────────────────────────────────── */
+
+.ev-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1a1410;
+  border: 3px solid #c8652a;
+  box-shadow: 0 4px 16px rgba(200, 101, 42, 0.45), 0 0 0 5px rgba(200, 101, 42, 0.15);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ev-cluster:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 24px rgba(200, 101, 42, 0.6), 0 0 0 7px rgba(200, 101, 42, 0.18);
+}
+
+.ev-cluster-bolt {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.ev-cluster-count {
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+/* Medium cluster — slightly larger */
+.ev-cluster-md {
+  width: 54px;
+  height: 54px;
+  border-color: #e8853a;
+  box-shadow: 0 5px 20px rgba(200, 101, 42, 0.5), 0 0 0 6px rgba(200, 101, 42, 0.18);
+}
+.ev-cluster-md .ev-cluster-count { font-size: 13px; }
+
+/* Large cluster — biggest */
+.ev-cluster-lg {
+  width: 62px;
+  height: 62px;
+  background: #2d2014;
+  border-color: #ff9940;
+  border-width: 3.5px;
+  box-shadow: 0 6px 24px rgba(200, 101, 42, 0.55), 0 0 0 8px rgba(200, 101, 42, 0.2);
+}
+.ev-cluster-lg .ev-cluster-bolt { font-size: 13px; }
+.ev-cluster-lg .ev-cluster-count { font-size: 14px; }
+
+/* ─── POI Toggle Panel ───────────────────────────────────────── */
+
+.poi-toggle-panel {
+  position: absolute;
+  top: 80px;
+  left: 16px;
+  z-index: 500;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+}
+
+.poi-toggle-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 2px;
+}
+
+.poi-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+}
+
+.poi-toggle input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  accent-color: #c8652a;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.poi-zoom-hint {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+
+
+
+@media (max-width: 768px) {
+  /* Map wrapper: allow shorter height so panel below can show */
+  .map-wrapper {
+    min-height: 300px;
+    border-radius: 0;
+  }
+
+  /* Legend — keep vertical column with text, just move to bottom-left */
+  .map-legend {
+    top: auto;
+    bottom: 24px;
+    left: 10px;
+    padding: 8px 12px;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .legend-item { gap: 6px; }
+  .legend-dot  { width: 9px; height: 9px; }
+  .legend-pin  { width: 18px; height: 18px; font-size: 10px; }
+  .legend-divider { height: 1px; background: #e5e7eb; margin: 2px 0; }
+
+  /* Station count badge */
+  .map-count-badge {
+    font-size: 11px;
+    padding: 4px 12px;
+    top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-legend {
+    bottom: 20px;
+    left: 8px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .legend-item { gap: 5px; }
+  .legend-dot  { width: 8px; height: 8px; }
+  .legend-pin  { width: 16px; height: 16px; font-size: 9px; }
+
+  .map-count-badge { font-size: 10px; padding: 3px 10px; }
+}

@@ -1,0 +1,648 @@
+/* ─── Sidebar Shell ───────────────────────────────────────────────
+   KEY FIX: No fixed width here — the sidebar width is controlled
+   by Home.css / the parent layout. The sidebar just fills whatever
+   space it's given, preventing crumpling when the window is small.
+────────────────────────────────────────────────────────────────── */
+
+.cs-sidebar {
+  width: 100%;
+  /* fill parent — width set by Home.css */
+  min-width: 0;
+  /* allow shrinking below any implicit min */
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* ─── Stats Bar ─────────────────────────────────────────────────── */
+
+.cs-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.cs-stat {
+  padding: 10px 6px;
+  text-align: center;
+  border-right: 1px solid #e5e7eb;
+}
+
+.cs-stat:last-child {
+  border-right: none;
+}
+
+.cs-stat-n {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 20px);
+  /* fluid font */
+  line-height: 1;
+  color: #111827;
+}
+
+.cs-stat-n.green {
+  color: #16a34a;
+}
+
+.cs-stat-n.red {
+  color: #dc2626;
+}
+
+.cs-stat-n small {
+  font-size: 10px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.cs-stat-l {
+  font-size: 9px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: 3px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ─── Section Header ────────────────────────────────────────────── */
+
+.cs-sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 8px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.cs-sec-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.cs-sec-count {
+  font-size: 11px;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  padding: 2px 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+  font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+
+/* ─── Scrollable List ───────────────────────────────────────────── */
+
+.cs-list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+  /* iOS momentum scrolling */
+  -webkit-overflow-scrolling: touch;
+  /* GPU compositing hint — speeds up scroll repaint on mid-range devices */
+  will-change: scroll-position;
+  contain: layout style;
+}
+
+.cs-list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.cs-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cs-list::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+/* ─── Station Card ──────────────────────────────────────────────── */
+
+.cs-card {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+  animation: csIn 0.22s ease both;
+  /* Prevent card from overflowing its container */
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  /* Prevent cards from shrinking/crumbling — scroll instead */
+  flex-shrink: 0;
+  min-height: fit-content;
+  /* In grid layouts, don't stretch to fill row height */
+  align-self: start;
+  /* Skip rendering off-screen cards — major win for 50+ stations */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 140px; /* approx card height for layout reserve */
+}
+
+@keyframes csIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cs-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.1);
+  transform: translateY(-1px);
+}
+
+.cs-card.active {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12), 0 4px 14px rgba(37, 99, 235, 0.12);
+}
+
+/* ─── Accent Bar ────────────────────────────────────────────────── */
+
+.cs-card-bar {
+  height: 3px;
+  width: 100%;
+}
+
+.cs-card-bar.on {
+  background: linear-gradient(90deg, #16a34a, #4ade80);
+}
+
+.cs-card-bar.off {
+  background: linear-gradient(90deg, #dc2626, #f87171);
+}
+
+/* ─── Card Header ───────────────────────────────────────────────── */
+
+.cs-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px 8px;
+  /* prevent overflow */
+  min-width: 0;
+}
+
+.cs-card-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #bfdbfe;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.cs-card-title-wrap {
+  flex: 1;
+  min-width: 0;
+  /* critical: allows text-overflow: ellipsis to work */
+}
+
+.cs-card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.cs-card-addr {
+  font-size: 11px;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.cs-badge {
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+  align-self: flex-start;
+}
+
+.cs-badge.on {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.cs-badge.off {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* ─── Plug Progress ─────────────────────────────────────────────── */
+
+.cs-prog-wrap {
+  padding: 0 12px 8px;
+}
+
+.cs-prog-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.cs-prog-info span.green {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.cs-prog-info span.orange {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.cs-prog-info span.red {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.cs-prog-track {
+  height: 4px;
+  background: #f3f4f6;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.cs-prog-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.cs-prog-fill.green {
+  background: linear-gradient(90deg, #16a34a, #4ade80);
+}
+
+.cs-prog-fill.orange {
+  background: linear-gradient(90deg, #d97706, #fbbf24);
+}
+
+.cs-prog-fill.red {
+  background: linear-gradient(90deg, #dc2626, #f87171);
+}
+
+/* ─── Info Pills ────────────────────────────────────────────────── */
+
+.cs-card-meta {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  /* wrap on narrow panels instead of overflow */
+  padding: 0 12px 10px;
+}
+
+.cs-tag {
+  font-size: 10.5px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cs-tag-power {
+  background: #fef9c3;
+  color: #854d0e;
+  border: 1px solid #fde68a;
+}
+
+.cs-tag-price {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+/* ─── Card Footer ───────────────────────────────────────────────── */
+
+.cs-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 10px;
+  border-top: 1px solid #f3f4f6;
+  gap: 8px;
+}
+
+.cs-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+.cs-stars {
+  color: #f59e0b;
+  font-size: 10px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.cs-rv {
+  font-weight: 700;
+  color: #111827;
+  font-size: 11.5px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.cs-rc {
+  color: #9ca3af;
+  font-size: 10.5px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.cs-card-btns {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.cs-btn-fav {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 7px;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.cs-btn-fav:hover {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.cs-btn-fav.on {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.cs-btn-go {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 7px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cs-btn-go:hover {
+  background: #1d4ed8;
+}
+
+/* ─── Empty State ───────────────────────────────────────────────── */
+
+.cs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.cs-empty-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  opacity: 0.35;
+}
+
+.cs-empty-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 4px;
+}
+
+.cs-empty-sub {
+  font-size: 12px;
+  color: #9ca3af;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ─── Skeleton Loading ──────────────────────────────────────────── */
+
+.cs-card-skeleton {
+  pointer-events: none;
+}
+
+.cs-skel {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.cs-skel-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  flex-shrink: 0;
+}
+
+.cs-skel-title {
+  height: 13px;
+  width: 70%;
+  margin-bottom: 6px;
+}
+
+.cs-skel-addr {
+  height: 10px;
+  width: 50%;
+}
+
+.cs-skel-bar {
+  height: 4px;
+  border-radius: 99px;
+  margin: 0 12px 8px;
+}
+
+.cs-skel-tag {
+  height: 20px;
+  width: 60px;
+  border-radius: 20px;
+}
+
+/* ─── Responsive StationList ───────────────────── */
+@media (max-width: 768px) {
+  .cs-sf {
+    padding: 7px 10px 0;
+  }
+
+  .cs-sf-search input {
+    height: 34px;
+    font-size: 12px;
+  }
+
+  .cs-sf-chips { gap: 4px; }
+
+  .cs-chip {
+    padding: 3px 8px;
+    font-size: 10.5px;
+  }
+
+  .cs-sf-results {
+    font-size: 10px;
+    padding: 3px 0 6px;
+  }
+
+  /* Stats row — 4 cols, tighter */
+  .cs-stats-row { gap: 0; }
+
+  .cs-stat { padding: 7px 4px; }
+
+  .cs-stat-n { font-size: 16px; }
+  .cs-stat-l { font-size: 8px; }
+
+  /* Cards */
+  .cs-card-head { padding: 8px 10px 6px; gap: 6px; }
+  .cs-card-title { font-size: 12.5px; }
+  .cs-card-addr  { font-size: 10px; }
+
+  .cs-prog-wrap { padding: 0 10px 6px; }
+
+  .cs-card-meta { padding: 0 10px 8px; gap: 4px; }
+  .cs-tag { font-size: 10px; padding: 2px 6px; }
+
+  .cs-card-foot { padding: 7px 10px 8px; }
+
+  .cs-btn-fav { width: 26px; height: 26px; font-size: 11px; }
+  .cs-btn-go  { height: 26px; padding: 0 10px; font-size: 11px; }
+
+  /* Section header */
+  .cs-sec-head  { padding: 8px 10px 6px; }
+  .cs-sec-title { font-size: 12px; }
+
+  /* Empty state */
+  .cs-empty { padding: 32px 16px; }
+  .cs-empty-icon { font-size: 28px; }
+  .cs-empty-text { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .cs-stat-n { font-size: 15px; }
+  .cs-stat-l { font-size: 7.5px; letter-spacing: 0.3px; }
+
+  .cs-card-head { padding: 7px 8px 5px; }
+  .cs-card-title { font-size: 12px; }
+
+  .cs-card-foot { padding: 6px 8px 7px; gap: 6px; }
+
+  /* Don't collapse the footer — keep side by side */
+  .cs-rating { flex-shrink: 1; overflow: hidden; }
+  .cs-btn-go { padding: 0 8px; font-size: 10.5px; }
+
+  .cs-card-meta { padding: 0 8px 7px; }
+}
+
+/* ─── Responsive StationDetails ────────────────── */
+@media (max-width: 768px) {
+  .details-modal {
+    width: 100vw;
+    height: 85vh;
+    border-radius: 16px 16px 0 0;
+    border-left: none;
+    border-top: 2px solid #1a1410;
+    padding: 18px;
+  }
+
+  .details-overlay {
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-name {
+    font-size: 16px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .report-buttons {
+    flex-direction: column;
+  }
+
+  .details-actions {
+    flex-direction: column;
+  }
+}

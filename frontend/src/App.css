@@ -1,0 +1,114 @@
+:root {
+  --bg: #f5f0e8;
+  --bg-1: #fff;
+  --bg-2: #f5f0e8;
+  --bg-3: #e8e3d8;
+  --border: #e8e3d8;
+  --border-dark: #d4cfc4;
+  --border-black: #1a1410;
+  --text-primary: #1a1410;
+  --text-secondary: #6a6560;
+  --text-muted: #9a9186;
+  --accent: #c8652a;
+  --accent-dim: #fdf0e8;
+  --accent-border: #f0ceb0;
+  --green: #2a7a3b;
+  --green-dim: #e8f5eb;
+  --green-border: #b8dcbf;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --shadow: 3px 3px 0 rgba(26, 20, 16, 0.1);
+  --radius: 6px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  height: 100dvh; /* fills true visual viewport on mobile */
+  overscroll-behavior: none; /* prevent accidental pull-to-refresh */
+}
+
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  /* Prevents double-tap zoom on mobile — makes taps instant */
+  touch-action: manipulation;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-3) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--bg-3);
+  border-radius: 4px;
+}
+
+.leaflet-container {
+  background: var(--bg-2) !important;
+  font-family: var(--font-body) !important;
+}
+
+.leaflet-control-zoom {
+  border: 1.5px solid var(--border-black) !important;
+  background: var(--bg-1) !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+  box-shadow: 2px 2px 0 rgba(26, 20, 16, 0.1) !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--bg-1) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border) !important;
+  font-family: var(--font-body) !important;
+  transition: all 0.15s;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--bg-2) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--bg-1) !important;
+  border: 1.5px solid var(--border-black) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-body) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--bg-1) !important;
+}
+
+.leaflet-popup-close-button {
+  color: var(--text-muted) !important;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

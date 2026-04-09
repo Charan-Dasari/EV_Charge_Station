@@ -1,0 +1,46 @@
+/* CSS snippet to append to AuthModal.css */
+.auth-social-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.auth-social-divider::before,
+.auth-social-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.auth-social-divider span {
+  padding: 0 10px;
+}
+
+.auth-social-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.auth-social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #333;
+}
+
+.auth-social-btn:hover {
+  background-color: #f5f5f5;
+}
