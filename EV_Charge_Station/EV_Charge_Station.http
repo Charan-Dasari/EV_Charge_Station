@@ -1,6 +1,0 @@
-@EV_Charge_Station_HostAddress = http://localhost:5150
-
-GET {{EV_Charge_Station_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
