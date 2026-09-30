@@ -180,7 +180,7 @@ function About() {
             <div className="dev-status">
               <div className="status-indicator">
                 <div className="status-dot-anim" />
-                Actively Developed — v2.5
+                v1.0 Full Release
               </div>
               <p>
                 ChargeSaathi is actively being improved. The backend runs on ASP.NET Core with

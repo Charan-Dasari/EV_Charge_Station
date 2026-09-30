@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 [ApiController]
@@ -14,21 +15,25 @@ public class PoiController : ControllerBase
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IMemoryCache _cache;
     private readonly ILogger<PoiController> _logger;
+    private readonly string _overpassEndpoint;
 
     // Only 1 Overpass call at a time — prevents 429 floods
     private static readonly SemaphoreSlim _overpassSemaphore = new SemaphoreSlim(1, 1);
     private const int SEMAPHORE_WAIT_MS = 3000;
     private const int OVERPASS_TIMEOUT_S = 20;
     private const int CACHE_MINUTES = 10;
+    private const string DEFAULT_OVERPASS_ENDPOINT = "https://overpass.private.coffee/api/interpreter";
 
     public PoiController(
         IHttpClientFactory httpClientFactory,
         IMemoryCache cache,
-        ILogger<PoiController> logger)
+        ILogger<PoiController> logger,
+        IConfiguration? configuration = null)
     {
         _httpClientFactory = httpClientFactory;
         _cache = cache;
         _logger = logger;
+        _overpassEndpoint = configuration?["Overpass:Endpoint"] ?? DEFAULT_OVERPASS_ENDPOINT;
     }
 
     [HttpGet("{type}")]
@@ -107,7 +112,7 @@ out center 50;";
                     "application/x-www-form-urlencoded");
 
                 response = await client.PostAsync(
-                    "https://overpass-api.de/api/interpreter", body, cts.Token);
+                    _overpassEndpoint, body, cts.Token);
             }
             catch (HttpRequestException httpEx)
             {
