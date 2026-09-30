@@ -1,0 +1,22 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/.vs/
+
+# Logs / temporary files
+**/*.log
+
+# Git
+.git/
+.gitignore
+
+# Local configuration / secrets
+**/appsettings.json
+**/appsettings.Development.json
+**/appsettings.*.json
+**/.env
+**/.env.*
+
+# Documentation / unnecessary files
+**/README*
+**/WALKTHROUGH.md

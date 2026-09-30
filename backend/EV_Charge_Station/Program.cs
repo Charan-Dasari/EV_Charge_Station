@@ -8,13 +8,35 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Render web service PORT binding (defaults to localhost when PORT is not set)
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
 
-// 1. CORS — allow React dev server
+// 1. CORS — allow React dev server & configured production origins
+var allowedCorsOriginsConfig = builder.Configuration["AllowedCorsOrigins"];
+var allowedOrigins = new List<string> { "http://localhost:3000" };
+
+if (!string.IsNullOrWhiteSpace(allowedCorsOriginsConfig))
+{
+    var parsedOrigins = allowedCorsOriginsConfig
+        .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    foreach (var origin in parsedOrigins)
+    {
+        if (!allowedOrigins.Contains(origin))
+        {
+            allowedOrigins.Add(origin);
+        }
+    }
+}
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
         policy => policy
-            .WithOrigins("http://localhost:3000")
+            .WithOrigins(allowedOrigins.ToArray())
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());   // Required for SignalR WebSocket handshake
