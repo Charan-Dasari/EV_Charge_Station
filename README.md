@@ -7,8 +7,7 @@ ChargeSaathi is a full-stack Electric Vehicle (EV) charging station locator and 
 ## 🌐 Live Demo
 
 * **Live Production Website:** [https://ev-charge-station-sigma.vercel.app](https://ev-charge-station-sigma.vercel.app)
-* **GitHub Repository:** [https://github.com/Charan-Dasari/EV_Charge_Station](https://github.com/Charan-Dasari/EV_Charge_Station)
-
+  
 ---
 
 ## 📌 About the Project
